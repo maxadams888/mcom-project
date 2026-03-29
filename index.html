@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMART & SIFT | MCom Communication Guide</title>
+  <style>
+    :root {
+      --bg: #f7f8fc;
+      --surface: rgba(255,255,255,0.88);
+      --surface-strong: #ffffff;
+      --text: #182033;
+      --muted: #5d6880;
+      --line: #dde3f0;
+      --shadow: 0 18px 40px rgba(20, 34, 66, 0.10);
+      --shadow-soft: 0 10px 24px rgba(20, 34, 66, 0.07);
+      --blue: #4f7cff;
+      --blue-soft: #eaf0ff;
+      --teal: #35b6b4;
+      --teal-soft: #e7fbfa;
+      --gold: #f0b34e;
+      --gold-soft: #fff4df;
+      --purple: #8c6bff;
+      --purple-soft: #f1edff;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(79,124,255,0.10), transparent 30%),
+        radial-gradient(circle at top right, rgba(53,182,180,0.10), transparent 28%),
+        linear-gradient(180deg, #f9fbff 0%, #f5f7fc 100%);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(247, 248, 252, 0.75);
+      border-bottom: 1px solid rgba(221, 227, 240, 0.75);
+    }
+
+    .topbar-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--blue), var(--teal));
+      color: white;
+      box-shadow: var(--shadow-soft);
+      font-size: 0.95rem;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .nav a:hover {
+      background: white;
+      color: var(--text);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero {
+      padding: 72px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .panel,
+    .section-card,
+    .example-card,
+    .checklist,
+    .mini-card,
+    .footer-card {
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.65);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card {
+      padding: 42px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -50px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(140,107,255,0.16) 0%, rgba(140,107,255,0.03) 60%, transparent 70%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4.6rem);
+      max-width: 11ch;
+      margin-bottom: 18px;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 62ch;
+      margin: 0 0 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 0.97rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), #6f8cff);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .dot.blue { background: var(--blue); }
+    .dot.teal { background: var(--teal); }
+    .dot.gold { background: var(--gold); }
+    .dot.purple { background: var(--purple); }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 16px;
+      background: var(--surface-strong);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 4px;
+      letter-spacing: -0.04em;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    main section {
+      padding: 26px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.7rem, 4vw, 3rem);
+      margin-bottom: 10px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 64ch;
+      margin: 0;
+    }
+
+    .section-card {
+      padding: 28px;
+    }
+
+    .overview-grid,
+    .focus-grid,
+    .two-col,
+    .closing-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .overview-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .focus-grid {
+      grid-template-columns: 0.95fr 1.05fr;
+      align-items: start;
+    }
+
+    .two-col {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .closing-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .mini-card {
+      padding: 22px;
+      height: 100%;
+    }
+
+    .mini-card h3,
+    .section-card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 10px;
+    }
+
+    .mini-card p,
+    .section-card p,
+    li {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .tag.blue { background: var(--blue-soft); color: var(--blue); }
+    .tag.teal { background: var(--teal-soft); color: #168f8d; }
+    .tag.gold { background: var(--gold-soft); color: #9c690f; }
+    .tag.purple { background: var(--purple-soft); color: #6948da; }
+
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .list li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      align-items: start;
+      gap: 12px;
+      padding: 12px 14px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .badge {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.03em;
+    }
+
+    .badge.blue { background: var(--blue); }
+    .badge.teal { background: var(--teal); }
+    .badge.gold { background: var(--gold); }
+    .badge.purple { background: var(--purple); }
+
+    .term-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .term {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow-soft);
+      padding: 18px;
+    }
+
+    .term h4 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .term p { margin: 0; }
+
+    .example-wrap {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .example-card {
+      padding: 20px;
+      border: 1px solid var(--line);
+    }
+
+    .example-card.good {
+      background: linear-gradient(180deg, rgba(231,251,250,0.92), #ffffff);
+    }
+
+    .example-card.bad {
+      background: linear-gradient(180deg, rgba(255,244,223,0.92), #ffffff);
+    }
+
+    .example-label {
+      display: inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+    }
+
+    .example-label.bad { background: var(--gold-soft); color: #9c690f; }
+    .example-label.good { background: var(--teal-soft); color: #168f8d; }
+
+    .quote {
+      margin: 0;
+      font-size: 1.03rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .checklist {
+      padding: 22px;
+      margin-top: 18px;
+      background: linear-gradient(135deg, rgba(79,124,255,0.06), rgba(140,107,255,0.06));
+    }
+
+    .checklist ul {
+      margin: 14px 0 0;
+      padding-left: 18px;
+    }
+
+    .split-callout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--line);
+      font-weight: 700;
+      color: var(--muted);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .footer {
+      padding: 26px 0 60px;
+    }
+
+    .footer-card {
+      padding: 28px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(79,124,255,0.07), rgba(53,182,180,0.08), rgba(140,107,255,0.08));
+    }
+
+    .footer-card p {
+      color: var(--muted);
+      max-width: 62ch;
+      margin: 12px auto 0;
+    }
+
+    .print-note {
+      margin-top: 14px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    strong.key {
+      color: var(--text);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .overview-grid,
+      .focus-grid,
+      .two-col,
+      .closing-grid,
+      .split-callout {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-inner {
+        padding: 14px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav { justify-content: flex-start; }
+      .hero-card { padding: 30px; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(var(--max), calc(100% - 20px)); }
+      .hero { padding-top: 42px; }
+      .hero-card, .panel, .section-card, .mini-card, .footer-card { padding: 20px; }
+      .stat-grid { grid-template-columns: 1fr; }
+      .nav a { padding: 8px 10px; font-size: 0.9rem; }
+      .hero-actions { flex-direction: column; }
+      .btn { width: 100%; }
+      .section-head { align-items: start; flex-direction: column; }
+    }
+
+    @media print {
+      .topbar, .hero-actions { display: none !important; }
+      body {
+        background: white;
+      }
+      .hero, main section, .footer {
+        padding: 12px 0;
+      }
+      .hero-card, .panel, .section-card, .mini-card, .footer-card, .example-card, .checklist {
+        box-shadow: none;
+        backdrop-filter: none;
+        border: 1px solid #d8dce8;
+        background: white;
+      }
+      a { text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-badge">M</div>
+        <div>MCom Guide: SMART & SIFT</div>
+      </div>
+      <nav class="nav">
+        <a href="#overview">Overview</a>
+        <a href="#smart">SMART</a>
+        <a href="#sift">SIFT</a>
+        <a href="#together">Together</a>
+        <a href="#takeaway">Takeaway</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-card">
+        <div class="eyebrow">MCom Communication Principles</div>
+        <h1>Write smarter. Think sharper.</h1>
+        <p>
+          This guide introduces <strong class="key">SMART</strong> and <strong class="key">SIFT</strong>, two practical frameworks that help students communicate with more clarity, purpose, and credibility. While both matter, this guide places special emphasis on how each one works and how to apply them in real academic and professional writing.
+        </p>
+        <div class="pill-row">
+          <div class="pill">Clear structure</div>
+          <div class="pill">Credible information</div>
+          <div class="pill">Better communication</div>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#smart">Explore SMART</a>
+          <a class="btn btn-secondary" href="#sift">Explore SIFT</a>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="panel">
+          <div class="panel-title"><span class="dot blue"></span> At a Glance</div>
+          <div class="stat-grid">
+            <div class="stat">
+              <strong>SMART</strong>
+              <span>A framework for writing clear, effective agenda-style communication.</span>
+            </div>
+            <div class="stat">
+              <strong>SIFT</strong>
+              <span>A method for evaluating information before using or sharing it.</span>
+            </div>
+            <div class="stat">
+              <strong>Purpose</strong>
+              <span>Help readers know what matters, what to trust, and what to do next.</span>
+            </div>
+            <div class="stat">
+              <strong>Result</strong>
+              <span>Communication that is both organized and credible.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title"><span class="dot teal"></span> Why These Matter in MCom</div>
+          <p>
+            MCom is not just about writing more. It is about making communication useful. SMART helps shape the message. SIFT helps test the evidence behind it. Together, they create communication that is easier to understand and easier to trust.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="overview">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="tag blue">1. Brief Overview</div>
+            <h2>What are SMART and SIFT?</h2>
+          </div>
+          <p>
+            These two frameworks serve different purposes. One improves how a message is written. The other improves how information is evaluated.
+          </p>
+        </div>
+
+        <div class="overview-grid">
+          <article class="mini-card">
+            <div class="tag blue">SMART</div>
+            <h3>A writing framework</h3>
+            <p>
+              SMART helps writers create communication that is focused, purposeful, and useful. In MCom, it is often used to shape agenda sentences and other task-oriented communication so the audience can quickly understand what is happening and why it matters.
+            </p>
+          </article>
+
+          <article class="mini-card">
+            <div class="tag teal">SIFT</div>
+            <h3>An evaluation framework</h3>
+            <p>
+              SIFT helps readers pause and examine information before trusting it. In MCom, it supports stronger research and better decision-making by helping students use reliable, well-supported sources instead of reacting too quickly to weak information.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="smart">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="tag purple">2. Focus on SMART</div>
+            <h2>SMART builds clear communication.</h2>
+          </div>
+          <p>
+            SMART is especially useful when the goal is to make writing more direct, practical, and audience-friendly.
+          </p>
+        </div>
+
+        <div class="focus-grid">
+          <article class="section-card">
+            <h3>What SMART is used for</h3>
+            <p>
+              SMART helps transform vague ideas into specific communication. Rather than writing something broad or unclear, a SMART sentence gives the audience a more precise sense of the task, decision, or discussion point.
+            </p>
+            <ul class="list">
+              <li>
+                <div class="badge purple">S</div>
+                <div>
+                  <strong class="key">Specific</strong><br>
+                  Clearly identifies the topic or action.
+                </div>
+              </li>
+              <li>
+                <div class="badge blue">M</div>
+                <div>
+                  <strong class="key">Measurable</strong><br>
+                  Points toward a concrete outcome or result.
+                </div>
+              </li>
+              <li>
+                <div class="badge teal">A</div>
+                <div>
+                  <strong class="key">Action-oriented</strong><br>
+                  Focuses on what will be done, decided, or produced.
+                </div>
+              </li>
+              <li>
+                <div class="badge gold">R</div>
+                <div>
+                  <strong class="key">Relevant</strong><br>
+                  Connects to the audience’s needs and the purpose of the message.
+                </div>
+              </li>
+              <li>
+                <div class="badge purple">T</div>
+                <div>
+                  <strong class="key">Time-bound</strong><br>
+                  Shows when the task, decision, or discussion should happen.
+                </div>
+              </li>
+            </ul>
+          </article>
+
+          <article class="section-card">
+            <div class="tag gold">Why it matters</div>
+            <h3>Why SMART strengthens writing</h3>
+            <div class="term-grid">
+              <div class="term">
+                <h4>It reduces vagueness.</h4>
+                <p>Readers should not have to guess what a sentence means or what outcome is expected.</p>
+              </div>
+              <div class="term">
+                <h4>It improves professionalism.</h4>
+                <p>Clear communication sounds more prepared, thoughtful, and useful in business and academic settings.</p>
+              </div>
+              <div class="term">
+                <h4>It respects the audience’s time.</h4>
+                <p>When a message is focused, the audience can understand it more quickly and respond more effectively.</p>
+              </div>
+            </div>
+
+            <div class="example-wrap">
+              <div class="example-card bad">
+                <div class="example-label bad">Weak Example</div>
+                <p class="quote">“Talk about improving social media.”</p>
+              </div>
+              <div class="example-card good">
+                <div class="example-label good">SMART Revision</div>
+                <p class="quote">“Decide on three social media strategies to increase student engagement during next month’s campaign.”</p>
+              </div>
+            </div>
+
+            <div class="checklist">
+              <h3>SMART checklist</h3>
+              <ul>
+                <li>Is the topic clear and focused?</li>
+                <li>Does the sentence point toward an outcome?</li>
+                <li>Does it describe a specific action or decision?</li>
+                <li>Is it relevant to the audience?</li>
+                <li>Does it include a timeframe when needed?</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sift">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="tag teal">3. Focus on SIFT</div>
+            <h2>SIFT strengthens credibility.</h2>
+          </div>
+          <p>
+            SIFT is less about writing the sentence and more about making sure the information inside the sentence deserves to be there.
+          </p>
+        </div>
+
+        <div class="focus-grid">
+          <article class="section-card">
+            <h3>What SIFT is used for</h3>
+            <p>
+              SIFT helps students slow down before accepting information as true. In a world full of fast claims, headlines, and posts, SIFT creates a habit of checking credibility before citing, repeating, or relying on information.
+            </p>
+
+            <ul class="list">
+              <li>
+                <div class="badge teal">S</div>
+                <div>
+                  <strong class="key">Stop</strong><br>
+                  Pause before reacting to or using the information.
+                </div>
+              </li>
+              <li>
+                <div class="badge blue">I</div>
+                <div>
+                  <strong class="key">Investigate the source</strong><br>
+                  Look at who created it, what they know, and whether they are credible.
+                </div>
+              </li>
+              <li>
+                <div class="badge gold">F</div>
+                <div>
+                  <strong class="key">Find better coverage</strong><br>
+                  Compare with stronger, more established sources.
+                </div>
+              </li>
+              <li>
+                <div class="badge purple">T</div>
+                <div>
+                  <strong class="key">Trace claims back</strong><br>
+                  Follow the information to the original study, report, or source when possible.
+                </div>
+              </li>
+            </ul>
+          </article>
+
+          <article class="section-card">
+            <div class="tag blue">Why it matters</div>
+            <h3>Why SIFT improves communication</h3>
+            <div class="term-grid">
+              <div class="term">
+                <h4>It prevents misinformation.</h4>
+                <p>Not every polished source is reliable. SIFT helps separate strong evidence from weak claims.</p>
+              </div>
+              <div class="term">
+                <h4>It supports stronger arguments.</h4>
+                <p>Communication becomes more persuasive when it is built on dependable sources.</p>
+              </div>
+              <div class="term">
+                <h4>It builds trust.</h4>
+                <p>Readers are more likely to believe a message when the evidence behind it is thoughtful and credible.</p>
+              </div>
+            </div>
+
+            <div class="example-wrap">
+              <div class="example-card bad">
+                <div class="example-label bad">Without SIFT</div>
+                <p class="quote">Using the first article that appears in a search without checking the author, source, or evidence.</p>
+              </div>
+              <div class="example-card good">
+                <div class="example-label good">With SIFT</div>
+                <p class="quote">Checking the source, comparing coverage, and tracing the claim back to the original report before using it.</p>
+              </div>
+            </div>
+
+            <div class="checklist">
+              <h3>SIFT checklist</h3>
+              <ul>
+                <li>Did I pause before trusting the claim?</li>
+                <li>Do I know who created this information?</li>
+                <li>Have I compared it with better sources?</li>
+                <li>Can I trace the claim back to its original evidence?</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="together">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="tag gold">4. Using Them Together</div>
+            <h2>Strong communication needs both.</h2>
+          </div>
+          <p>
+            SMART and SIFT do different jobs, but they work best side by side.
+          </p>
+        </div>
+
+        <div class="two-col">
+          <article class="mini-card">
+            <h3>SMART gives structure.</h3>
+            <p>
+              It helps a message become more focused, purposeful, and easier to act on. Without structure, ideas can feel vague or incomplete.
+            </p>
+          </article>
+
+          <article class="mini-card">
+            <h3>SIFT gives credibility.</h3>
+            <p>
+              It helps a writer examine evidence before relying on it. Without credibility, even well-written communication can be weak.
+            </p>
+          </article>
+        </div>
+
+        <div class="split-callout">
+          <div class="example-card bad">
+            <div class="example-label bad">Before</div>
+            <p class="quote">“We should use online sources to improve our strategy.”</p>
+          </div>
+          <div class="example-card good">
+            <div class="example-label good">After SMART + SIFT</div>
+            <p class="quote">“Use two verified industry reports to identify three strategies for improving next month’s communication campaign.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="takeaway">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="tag purple">5. Final Takeaway</div>
+            <h2>Clear communication is intentional.</h2>
+          </div>
+          <p>
+            The best messages are not only clear. They are also credible. That is why SMART and SIFT matter in MCom.
+          </p>
+        </div>
+
+        <div class="closing-grid">
+          <article class="section-card">
+            <h3>Remember this</h3>
+            <p>
+              Use <strong class="key">SMART</strong> when you want your writing to be clear, focused, and useful. Use <strong class="key">SIFT</strong> when you want your information to be trustworthy and well supported.
+            </p>
+            <p>
+              Together, they help writers communicate with greater confidence, stronger organization, and more credibility.
+            </p>
+          </article>
+
+          <article class="section-card">
+            <h3>Quick summary</h3>
+            <ul class="list">
+              <li>
+                <div class="badge blue">1</div>
+                <div>SMART improves the <strong class="key">structure</strong> of communication.</div>
+              </li>
+              <li>
+                <div class="badge teal">2</div>
+                <div>SIFT improves the <strong class="key">quality</strong> of information.</div>
+              </li>
+              <li>
+                <div class="badge purple">3</div>
+                <div>Using both creates communication that is stronger, clearer, and more trustworthy.</div>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card">
+        <h2>MCom principle guide: SMART & SIFT</h2>
+        <p>
+          Designed as a clean, readable student resource that explains each framework, shows how each one is used, and highlights why both matter in effective communication.
+        </p>
+    </div>
+  </footer>
+</body>
+</html>
